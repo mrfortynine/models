@@ -23,6 +23,7 @@ import tensorflow as tf
 from object_detection.core import data_decoder
 from object_detection.core import standard_fields as fields
 from object_detection.utils import label_map_util
+from object_detection.workaround import tfexample_decoder as tfexample_decoder_workaround
 
 slim_example_decoder = tf.contrib.slim.tfexample_decoder
 
@@ -125,12 +126,12 @@ class TfExampleDecoder(data_decoder.DataDecoder):
           default_value=-1)
       # If the label_map_proto is provided, try to use it in conjunction with
       # the class text, and fall back to a materialized ID.
-      label_handler = slim_example_decoder.BackupHandler(
-          slim_example_decoder.LookupTensor(
+      label_handler = tfexample_decoder_workaround.BackupHandler(
+          tfexample_decoder_workaround.LookupTensor(
               'image/object/class/text', table, default_value=''),
-          slim_example_decoder.Tensor('image/object/class/label'))
+          tfexample_decoder_workaround.Tensor('image/object/class/label'))
     else:
-      label_handler = slim_example_decoder.Tensor('image/object/class/label')
+      label_handler = tfexample_decoder_workaround.Tensor('image/object/class/label')
     self.items_to_handlers[
         fields.InputDataFields.groundtruth_classes] = label_handler
 
