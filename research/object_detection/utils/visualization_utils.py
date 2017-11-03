@@ -21,7 +21,7 @@ The functions do not return a value, instead they modify the image itself.
 """
 import collections
 import functools
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import numpy as np
 import PIL.Image as Image
 import PIL.ImageColor as ImageColor
@@ -492,7 +492,7 @@ def visualize_boxes_and_labels_on_image_array(image,
 
   return image
 
-
+'''
 def add_cdf_image_summary(values, name):
   """Adds a tf.summary.image for a CDF plot of the values.
 
@@ -522,3 +522,4 @@ def add_cdf_image_summary(values, name):
     return image
   cdf_plot = tf.py_func(cdf_plot, [values], tf.uint8)
   tf.summary.image(name, cdf_plot)
+'''
